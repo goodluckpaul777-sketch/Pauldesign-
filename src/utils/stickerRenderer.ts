@@ -181,11 +181,27 @@ function wrapText(
  */
 function loadImage(src: string): Promise<HTMLImageElement | null> {
   return new Promise((resolve) => {
+    // Sanitize any legacy /src/assets paths
+    const cleanSrc = src.startsWith('/src/assets/') ? src.replace('/src/assets/', '/assets/') : src;
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => resolve(img);
-    img.onerror = () => resolve(null);
-    img.src = src;
+    img.onerror = () => {
+      // If failed and not already using static fallback, attempt static fallback
+      if (cleanSrc.includes('assets/images/')) {
+        const filename = cleanSrc.split('/').pop();
+        if (filename && !cleanSrc.startsWith('/assets/images/')) {
+          const fallbackImg = new Image();
+          fallbackImg.crossOrigin = 'anonymous';
+          fallbackImg.onload = () => resolve(fallbackImg);
+          fallbackImg.onerror = () => resolve(null);
+          fallbackImg.src = `/assets/images/${filename}`;
+          return;
+        }
+      }
+      resolve(null);
+    };
+    img.src = cleanSrc;
   });
 }
 

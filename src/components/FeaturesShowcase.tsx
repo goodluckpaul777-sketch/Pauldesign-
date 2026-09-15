@@ -2,27 +2,31 @@ import React, { useState } from 'react';
 import { SERVICE_FEATURES, PORTFOLIO_SAMPLES } from '../data/platformsAndServices';
 import { Smartphone, Zap, Search, ShoppingBag, Palette, PhoneCall, CheckCircle2, ArrowRight, ExternalLink, ShieldCheck, Phone, MessageSquare, Database, Globe, Sparkles, Wrench, Mail, Monitor, Laptop, Image as ImageIcon } from 'lucide-react';
 import { motion } from 'motion/react';
+import { studioImg, devicesImg, backendImg } from '../assets/images';
 
 const VISUAL_GALLERY = [
   {
     title: 'Creative Studio & Fast Delivery',
     subtitle: 'Paul Web Design Workstation',
     desc: 'Every layout is designed and coded with modern frameworks, high-speed loading, and high-contrast typography.',
-    image: '/src/assets/images/paul_web_studio_1789410240842.jpg',
+    image: studioImg || '/assets/images/paul_web_studio_1789410240842.jpg',
+    fallback: '/assets/images/paul_web_studio_1789410240842.jpg',
     tag: 'Studio Setup'
   },
   {
     title: '100% Mobile & Multi-Screen Tested',
     subtitle: 'Smartphones, Tablets & Desktops',
     desc: 'Tested across diverse screen sizes so your business looks immaculate on iPhones, Androids, iPads, and Laptops.',
-    image: '/src/assets/images/responsive_devices_1789410254877.jpg',
+    image: devicesImg || '/assets/images/responsive_devices_1789410254877.jpg',
+    fallback: '/assets/images/responsive_devices_1789410254877.jpg',
     tag: 'Responsive'
   },
   {
     title: 'Back-End System & Admin Control',
     subtitle: 'Full Administrative Handover',
     desc: 'Complete control of your website. Manage contact inquiries, update images, and maintain data backups with ease.',
-    image: '/src/assets/images/backend_control_panel_1789410267634.jpg',
+    image: backendImg || '/assets/images/backend_control_panel_1789410267634.jpg',
+    fallback: '/assets/images/backend_control_panel_1789410267634.jpg',
     tag: 'Back-End Portal'
   }
 ];
@@ -108,6 +112,11 @@ export const FeaturesShowcase: React.FC = () => {
                   src={item.image}
                   alt={item.title}
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    if (e.currentTarget.src !== item.fallback) {
+                      e.currentTarget.src = item.fallback;
+                    }
+                  }}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-emerald-400 font-mono text-[11px] font-bold px-3 py-1 rounded-full border border-emerald-500/30 shadow">

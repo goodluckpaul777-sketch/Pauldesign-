@@ -29,6 +29,7 @@ import {
   downloadStickerAsPng, 
   downloadStickerAsSvg 
 } from '../utils/stickerRenderer';
+import { developerImg, studioImg, devicesImg, backendImg } from '../assets/images';
 
 interface StickerCustomizerProps {
   initialPhone?: string;
@@ -38,22 +39,26 @@ const AVAILABLE_PHOTOS = [
   {
     id: 'studio',
     label: 'Studio Workspace',
-    path: '/src/assets/images/paul_web_studio_1789410240842.jpg'
+    path: studioImg || '/assets/images/paul_web_studio_1789410240842.jpg',
+    fallback: '/assets/images/paul_web_studio_1789410240842.jpg'
   },
   {
     id: 'devices',
     label: 'Multi-Device View',
-    path: '/src/assets/images/responsive_devices_1789410254877.jpg'
+    path: devicesImg || '/assets/images/responsive_devices_1789410254877.jpg',
+    fallback: '/assets/images/responsive_devices_1789410254877.jpg'
   },
   {
     id: 'backend',
     label: 'Back-End Portal',
-    path: '/src/assets/images/backend_control_panel_1789410267634.jpg'
+    path: backendImg || '/assets/images/backend_control_panel_1789410267634.jpg',
+    fallback: '/assets/images/backend_control_panel_1789410267634.jpg'
   },
   {
     id: 'developer',
     label: 'Developer with Laptop',
-    path: '/src/assets/images/developer_holding_system_1785565545926.jpg'
+    path: developerImg || '/assets/images/developer_holding_system_1785565545926.jpg',
+    fallback: '/assets/images/developer_holding_system_1785565545926.jpg'
   }
 ];
 
@@ -76,7 +81,7 @@ export const StickerCustomizer: React.FC<StickerCustomizerProps> = ({
     template: 'showcase',
     includeAvatar: true,
     includeQrCode: false,
-    avatarImgUrl: '/src/assets/images/paul_web_studio_1789410240842.jpg'
+    avatarImgUrl: studioImg || '/assets/images/paul_web_studio_1789410240842.jpg'
   });
 
   const [isDownloading, setIsDownloading] = useState(false);
@@ -448,6 +453,11 @@ ${options.badgeText}`;
                           src={photo.path}
                           alt={photo.label}
                           referrerPolicy="no-referrer"
+                          onError={(e) => {
+                            if (e.currentTarget.src !== photo.fallback) {
+                              e.currentTarget.src = photo.fallback;
+                            }
+                          }}
                           className="w-8 h-8 rounded-lg object-cover shrink-0 border border-slate-200"
                         />
                         <span className="text-[11px] font-semibold leading-tight line-clamp-1">

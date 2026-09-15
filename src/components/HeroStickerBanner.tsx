@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Phone, MessageSquare, Copy, Check, Sparkles, ShieldCheck, Zap, Globe, ArrowRight, Share2, Award, Mail, Laptop, Monitor, Server, Palette, ClipboardEdit } from 'lucide-react';
 import { motion } from 'motion/react';
+import { developerImg, studioImg, devicesImg, backendImg } from '../assets/images';
 
 interface HeroStickerBannerProps {
   onNavigateToPlatforms: () => void;
@@ -14,28 +15,32 @@ const GALLERY_IMAGES = [
     id: 'developer',
     title: 'Web Developer with Laptop System',
     subtitle: 'Direct Developer Partnership',
-    path: '/src/assets/images/developer_holding_system_1785565545926.jpg',
+    path: developerImg || '/assets/images/developer_holding_system_1785565545926.jpg',
+    fallback: '/assets/images/developer_holding_system_1785565545926.jpg',
     badge: 'Lead Developer'
   },
   {
     id: 'studio',
     title: 'Paul Web Design Creative Studio',
     subtitle: 'High-Performance Workstation',
-    path: '/src/assets/images/paul_web_studio_1789410240842.jpg',
+    path: studioImg || '/assets/images/paul_web_studio_1789410240842.jpg',
+    fallback: '/assets/images/paul_web_studio_1789410240842.jpg',
     badge: 'Design Studio'
   },
   {
     id: 'devices',
     title: '100% Mobile & Multi-Device Tested',
     subtitle: 'Smartphones, Tablets & Desktops',
-    path: '/src/assets/images/responsive_devices_1789410254877.jpg',
+    path: devicesImg || '/assets/images/responsive_devices_1789410254877.jpg',
+    fallback: '/assets/images/responsive_devices_1789410254877.jpg',
     badge: 'All Devices'
   },
   {
     id: 'backend',
     title: 'Custom Back-End System & Admin Portal',
     subtitle: 'Complete Database & Control Setup',
-    path: '/src/assets/images/backend_control_panel_1789410267634.jpg',
+    path: backendImg || '/assets/images/backend_control_panel_1789410267634.jpg',
+    fallback: '/assets/images/backend_control_panel_1789410267634.jpg',
     badge: 'Admin Control'
   }
 ];
@@ -350,6 +355,11 @@ export const HeroStickerBanner: React.FC<HeroStickerBannerProps> = ({
                   src={currentImage.path}
                   alt={currentImage.title}
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    if (e.currentTarget.src !== currentImage.fallback) {
+                      e.currentTarget.src = currentImage.fallback;
+                    }
+                  }}
                   className="w-full h-auto object-cover aspect-[4/3] sm:aspect-[3/4] group-hover:scale-105 transition-transform duration-500"
                 />
                 
@@ -398,6 +408,11 @@ export const HeroStickerBanner: React.FC<HeroStickerBannerProps> = ({
                           src={img.path}
                           alt={img.title}
                           referrerPolicy="no-referrer"
+                          onError={(e) => {
+                            if (e.currentTarget.src !== img.fallback) {
+                              e.currentTarget.src = img.fallback;
+                            }
+                          }}
                           className="w-12 h-10 object-cover"
                         />
                       </button>
