@@ -22,7 +22,9 @@ import {
   FileText, 
   Palette, 
   Info,
-  AlertCircle
+  AlertCircle,
+  Coins,
+  MapPin
 } from 'lucide-react';
 import { ClientProjectBrief, UploadedImageInfo, CustomInfoItem } from '../types';
 
@@ -31,6 +33,7 @@ interface ClientIntakeModalProps {
   onClose: () => void;
   developerPhone?: string;
   developerEmail?: string;
+  initialIndustry?: string;
 }
 
 const INITIAL_BRIEF: ClientProjectBrief = {
@@ -38,6 +41,10 @@ const INITIAL_BRIEF: ClientProjectBrief = {
   brandIndustry: '',
   slogan: '',
   motto: '',
+  targetMarket: 'both',
+  targetCountry: '',
+  currencyPreference: 'NGN & USD',
+  phoneCountryCode: '+234',
   aboutCompany: '',
   servicesProducts: '',
   targetAudience: '',
@@ -69,6 +76,10 @@ const SAMPLE_DEMO_DATA: ClientProjectBrief = {
   brandIndustry: 'E-Commerce, Freight & Express Delivery',
   slogan: 'Delivering Excellence at the Speed of Trust',
   motto: 'Integrity, Reliability, Speed',
+  targetMarket: 'both',
+  targetCountry: 'Nigeria & Worldwide (UK, US, Canada, EU)',
+  currencyPreference: 'NGN (₦) & USD ($)',
+  phoneCountryCode: '+234',
   aboutCompany: 'Apex Prime is a premier logistics and modern merchandise provider founded to simplify express shipments, online consumer goods delivery, and interstate parcel handling for individuals and businesses.',
   servicesProducts: 'Door-to-door express parcel delivery, Warehousing & distribution, Verified online retail merchandise store, Corporate fleet solutions',
   targetAudience: 'Online shoppers, e-commerce vendors, SMEs, corporate executives needing fast courier and logistics services.',
@@ -133,9 +144,19 @@ export const ClientIntakeModal: React.FC<ClientIntakeModalProps> = ({
   isOpen,
   onClose,
   developerPhone = '08106259457',
-  developerEmail = 'goodluckpaul777@gmail.com'
+  developerEmail = 'goodluckpaul777@gmail.com',
+  initialIndustry
 }) => {
   const [brief, setBrief] = useState<ClientProjectBrief>(INITIAL_BRIEF);
+
+  React.useEffect(() => {
+    if (initialIndustry && isOpen) {
+      setBrief(prev => ({
+        ...prev,
+        brandIndustry: initialIndustry
+      }));
+    }
+  }, [initialIndustry, isOpen]);
   const [activeStep, setActiveStep] = useState<number>(1);
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const [copiedStatus, setCopiedStatus] = useState<boolean>(false);
@@ -147,7 +168,7 @@ export const ClientIntakeModal: React.FC<ClientIntakeModalProps> = ({
   const [customValue, setCustomValue] = useState<string>('');
   const [showCustomForm, setShowCustomForm] = useState<boolean>(false);
 
-  const totalSteps = 5;
+  const totalSteps = 6;
 
   const handleInputChange = (field: keyof ClientProjectBrief, value: any) => {
     setBrief(prev => ({
@@ -295,6 +316,16 @@ Date: ${new Date().toLocaleDateString()}`);
     const compLines: string[] = [];
     if (!isExcluded('companyName')) compLines.push(`• Company Name: ${brief.companyName || 'Not specified'}`);
     if (!isExcluded('brandIndustry')) compLines.push(`• Brand / Industry: ${brief.brandIndustry || 'Not specified'}`);
+    if (!isExcluded('targetMarket')) {
+      const marketLabel = brief.targetMarket === 'international' 
+        ? 'International / Global Audience' 
+        : brief.targetMarket === 'local' 
+        ? 'Local / Domestic Audience' 
+        : 'Both Local & International Audience';
+      compLines.push(`• Market Reach: ${marketLabel}`);
+    }
+    if (!isExcluded('targetCountry') && brief.targetCountry) compLines.push(`• Target Countries / Location: ${brief.targetCountry}`);
+    if (!isExcluded('currencyPreference') && brief.currencyPreference) compLines.push(`• Currency Preference: ${brief.currencyPreference}`);
     if (!isExcluded('slogan') && brief.slogan) compLines.push(`• Slogan: ${brief.slogan}`);
     if (!isExcluded('motto') && brief.motto) compLines.push(`• Motto: ${brief.motto}`);
     if (compLines.length > 0) {
@@ -318,9 +349,10 @@ Date: ${new Date().toLocaleDateString()}`);
 
     // 3. Contact Details
     const contactLines: string[] = [];
+    const phonePrefix = (!isExcluded('phoneCountryCode') && brief.phoneCountryCode) ? `(${brief.phoneCountryCode}) ` : '';
     if (!isExcluded('contactPerson') && brief.contactPerson) contactLines.push(`• Contact Person: ${brief.contactPerson}`);
-    if (!isExcluded('phone') && brief.phone) contactLines.push(`• Phone Number: ${brief.phone}`);
-    if (!isExcluded('whatsapp') && (brief.whatsapp || brief.phone)) contactLines.push(`• WhatsApp Number: ${brief.whatsapp || brief.phone}`);
+    if (!isExcluded('phone') && brief.phone) contactLines.push(`• Phone Number: ${phonePrefix}${brief.phone}`);
+    if (!isExcluded('whatsapp') && (brief.whatsapp || brief.phone)) contactLines.push(`• WhatsApp Number: ${phonePrefix}${brief.whatsapp || brief.phone}`);
     if (!isExcluded('email') && brief.email) contactLines.push(`• Email: ${brief.email}`);
     if (!isExcluded('physicalAddress') && brief.physicalAddress) contactLines.push(`• Physical Address: ${brief.physicalAddress}`);
     if (contactLines.length > 0) {
@@ -513,33 +545,35 @@ Date: ${new Date().toLocaleDateString()}`);
         </div>
 
         {/* Step Indicator Tabs */}
-        <div className="bg-slate-50 border-b border-slate-200 px-4 py-2.5 overflow-x-auto flex items-center justify-between gap-2 text-xs">
-          <div className="flex items-center gap-1 sm:gap-2">
+        <div className="bg-slate-50 border-b border-slate-200 px-4 py-3 overflow-x-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {[
-              { num: 1, label: 'Company & Brand' },
-              { num: 2, label: 'About & Services' },
-              { num: 3, label: 'Contact & Socials' },
-              { num: 4, label: 'Photos & Visuals' },
-              { num: 5, label: 'Review & Send' }
+              { num: 1, label: 'Company & Brand', short: '1. Brand' },
+              { num: 2, label: 'About & Services', short: '2. About' },
+              { num: 3, label: 'Contact & Socials', short: '3. Contact' },
+              { num: 4, label: 'Photos & Visuals', short: '4. Photos' },
+              { num: 5, label: 'Other Information', short: '5. Other Info' },
+              { num: 6, label: 'Review & Send', short: '6. Send' }
             ].map((st) => (
               <button
                 key={st.num}
                 type="button"
                 onClick={() => setActiveStep(st.num)}
-                className={`px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                className={`px-3 sm:px-4 py-2 rounded-xl font-black text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
                   activeStep === st.num
-                    ? 'bg-slate-950 text-emerald-400 shadow-xs'
+                    ? 'bg-slate-950 text-emerald-400 shadow-md ring-2 ring-emerald-400/40'
                     : activeStep > st.num
-                    ? 'bg-emerald-100 text-emerald-800'
-                    : 'text-slate-500 hover:bg-slate-200/60'
+                    ? 'bg-emerald-100 text-emerald-900'
+                    : 'text-slate-600 bg-slate-200/70 hover:bg-slate-200'
                 }`}
               >
-                <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] ${
-                  activeStep === st.num ? 'bg-emerald-400 text-slate-950' : 'bg-slate-300 text-slate-700'
+                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-black shrink-0 ${
+                  activeStep === st.num ? 'bg-emerald-400 text-slate-950' : 'bg-slate-300 text-slate-800'
                 }`}>
                   {st.num}
                 </span>
-                <span className="hidden md:inline">{st.label}</span>
+                <span className="hidden sm:inline">{st.label}</span>
+                <span className="sm:hidden">{st.short}</span>
               </button>
             ))}
           </div>
@@ -551,10 +585,10 @@ Date: ${new Date().toLocaleDateString()}`);
                 setActiveStep(5);
                 setShowCustomForm(true);
               }}
-              className="text-[11px] font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-100 hover:bg-emerald-200 px-2.5 py-1 rounded-lg flex items-center gap-1 transition-colors"
+              className="text-xs font-black text-emerald-800 hover:text-emerald-900 bg-emerald-200/80 hover:bg-emerald-200 px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer"
             >
-              <Plus className="w-3.5 h-3.5" />
-              <span>+ Add Other Info</span>
+              <Plus className="w-4 h-4 stroke-[2.5]" />
+              <span>+ Add Info</span>
             </button>
           </div>
         </div>
@@ -567,16 +601,16 @@ Date: ${new Date().toLocaleDateString()}`);
             <div className="space-y-5 animate-fade-in">
               <div className="border-b border-slate-100 pb-3 flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <h4 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-                    <Building2 className="w-4 h-4 text-emerald-600" />
-                    <span>Company Name, Brand, Slogan & Motto</span>
+                  <h4 className="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
+                    <Building2 className="w-5 h-5 text-emerald-600" />
+                    <span>Step 1: Company Name & Brand Identity</span>
                   </h4>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Tell Paul the primary identity for your website. You can clear or remove any info you don't have.
+                  <p className="text-sm font-semibold text-slate-600 mt-1">
+                    Tell Paul the primary name and identity for your website.
                   </p>
                 </div>
-                <div className="text-xs font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                  Step 1 of 5
+                <div className="text-xs font-black font-mono text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">
+                  Step 1 of 6
                 </div>
               </div>
 
@@ -621,6 +655,111 @@ Date: ${new Date().toLocaleDateString()}`);
                     placeholder="e.g. Fashion, E-Commerce, Logistics, Restaurant, Real Estate, Consulting"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm text-slate-900 bg-white"
                   />
+                </div>
+
+                {/* 3. Market Scope: Local vs International */}
+                <div className={`space-y-2.5 sm:col-span-2 p-3.5 rounded-2xl border transition-all ${
+                  isFieldExcluded('targetMarket') ? 'bg-amber-50/60 border-amber-200 opacity-60' : 'bg-emerald-50/40 border-emerald-200/90'
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
+                      <Globe className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>3. Market Reach / Client Audience (Local vs International)</span>
+                    </label>
+                    {renderFieldControls('targetMarket', brief.targetMarket, () => handleClearField('targetMarket'))}
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-2">
+                    <button
+                      type="button"
+                      disabled={isFieldExcluded('targetMarket')}
+                      onClick={() => handleInputChange('targetMarket', 'local')}
+                      className={`p-2.5 rounded-xl border text-left transition-all flex flex-col items-center sm:items-start gap-1 cursor-pointer ${
+                        brief.targetMarket === 'local'
+                          ? 'bg-emerald-600 text-white border-emerald-700 shadow-sm'
+                          : 'bg-white text-slate-700 border-slate-200 hover:border-emerald-300'
+                      }`}
+                    >
+                      <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm">
+                        <MapPin className="w-3.5 h-3.5 shrink-0" />
+                        <span>Local Only</span>
+                      </div>
+                      <span className={`text-[10px] hidden sm:block ${brief.targetMarket === 'local' ? 'text-emerald-100' : 'text-slate-500'}`}>
+                        City or Domestic country only
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      disabled={isFieldExcluded('targetMarket')}
+                      onClick={() => handleInputChange('targetMarket', 'international')}
+                      className={`p-2.5 rounded-xl border text-left transition-all flex flex-col items-center sm:items-start gap-1 cursor-pointer ${
+                        brief.targetMarket === 'international'
+                          ? 'bg-emerald-600 text-white border-emerald-700 shadow-sm'
+                          : 'bg-white text-slate-700 border-slate-200 hover:border-emerald-300'
+                      }`}
+                    >
+                      <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm">
+                        <Globe className="w-3.5 h-3.5 shrink-0" />
+                        <span>International</span>
+                      </div>
+                      <span className={`text-[10px] hidden sm:block ${brief.targetMarket === 'international' ? 'text-emerald-100' : 'text-slate-500'}`}>
+                        Overseas & Global reach
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      disabled={isFieldExcluded('targetMarket')}
+                      onClick={() => handleInputChange('targetMarket', 'both')}
+                      className={`p-2.5 rounded-xl border text-left transition-all flex flex-col items-center sm:items-start gap-1 cursor-pointer ${
+                        brief.targetMarket === 'both'
+                          ? 'bg-emerald-600 text-white border-emerald-700 shadow-sm'
+                          : 'bg-white text-slate-700 border-slate-200 hover:border-emerald-300'
+                      }`}
+                    >
+                      <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm">
+                        <Sparkles className="w-3.5 h-3.5 shrink-0" />
+                        <span>Both Local & Intl</span>
+                      </div>
+                      <span className={`text-[10px] hidden sm:block ${brief.targetMarket === 'both' ? 'text-emerald-100' : 'text-slate-500'}`}>
+                        Domestic + Worldwide clients
+                      </span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                    {/* Target Countries / Region */}
+                    <div>
+                      <label className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mb-1">
+                        Target Country / Locations:
+                      </label>
+                      <input
+                        type="text"
+                        value={brief.targetCountry || ''}
+                        disabled={isFieldExcluded('targetCountry')}
+                        onChange={(e) => handleInputChange('targetCountry', e.target.value)}
+                        placeholder="e.g. Nigeria, Ghana, UK, US, Worldwide"
+                        className="w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-xs text-slate-900 bg-white"
+                      />
+                    </div>
+
+                    {/* Currency preference */}
+                    <div>
+                      <label className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mb-1 flex items-center gap-1">
+                        <Coins className="w-3 h-3 text-emerald-600" />
+                        <span>Website Currency Preference:</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={brief.currencyPreference || ''}
+                        disabled={isFieldExcluded('currencyPreference')}
+                        onChange={(e) => handleInputChange('currencyPreference', e.target.value)}
+                        placeholder="e.g. NGN (₦), USD ($), GBP (£), Multi-Currency"
+                        className="w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-xs text-slate-900 bg-white"
+                      />
+                    </div>
+                  </div>
                 </div>
 
                 {/* 3. Slogan */}
@@ -678,16 +817,16 @@ Date: ${new Date().toLocaleDateString()}`);
             <div className="space-y-5 animate-fade-in">
               <div className="border-b border-slate-100 pb-3 flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <h4 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-emerald-600" />
-                    <span>About Your Company & What You Offer</span>
+                  <h4 className="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-emerald-600" />
+                    <span>Step 2: About Company & Services</span>
                   </h4>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Describe your business story and catalog. Use the Clear/Remove buttons on any field if not needed.
+                  <p className="text-sm font-semibold text-slate-600 mt-1">
+                    Describe what your business does, your products/services, and your target audience.
                   </p>
                 </div>
-                <div className="text-xs font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                  Step 2 of 5
+                <div className="text-xs font-black font-mono text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">
+                  Step 2 of 6
                 </div>
               </div>
 
@@ -760,16 +899,64 @@ Date: ${new Date().toLocaleDateString()}`);
             <div className="space-y-5 animate-fade-in">
               <div className="border-b border-slate-100 pb-3 flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <h4 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-emerald-600" />
-                    <span>Contact Details & Social Media Handles</span>
+                  <h4 className="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
+                    <Phone className="w-5 h-5 text-emerald-600" />
+                    <span>Step 3: Phone, WhatsApp & Social Media</span>
                   </h4>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Connect your direct lines. Clear or remove any social networks you don't use.
+                  <p className="text-sm font-semibold text-slate-600 mt-1">
+                    Enter your contact numbers and handles for customers to reach you.
                   </p>
                 </div>
-                <div className="text-xs font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                  Step 3 of 5
+                <div className="text-xs font-black font-mono text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">
+                  Step 3 of 6
+                </div>
+              </div>
+
+              {/* International / Local Dialing Code Selector */}
+              <div className={`p-3 rounded-2xl border transition-all ${
+                isFieldExcluded('phoneCountryCode') ? 'bg-amber-50/60 border-amber-200 opacity-60' : 'bg-slate-50/70 border-slate-200'
+              }`}>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
+                    <Globe className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Phone Country Dialing Code (Local or International)</span>
+                  </label>
+                  {renderFieldControls('phoneCountryCode', brief.phoneCountryCode, () => handleClearField('phoneCountryCode'))}
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  {[
+                    { code: '+234', label: '🇳🇬 Nigeria (+234)' },
+                    { code: '+1', label: '🇺🇸 / 🇨🇦 US/Canada (+1)' },
+                    { code: '+44', label: '🇬🇧 UK (+44)' },
+                    { code: '+233', label: '🇬🇭 Ghana (+233)' },
+                    { code: '+27', label: '🇿🇦 S.Africa (+27)' },
+                    { code: '+971', label: '🇦🇪 UAE (+971)' },
+                  ].map((dial) => (
+                    <button
+                      key={dial.code}
+                      type="button"
+                      disabled={isFieldExcluded('phoneCountryCode')}
+                      onClick={() => handleInputChange('phoneCountryCode', dial.code)}
+                      className={`px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+                        brief.phoneCountryCode === dial.code
+                          ? 'bg-emerald-600 text-white border-emerald-700 shadow-sm'
+                          : 'bg-white text-slate-700 border-slate-200 hover:border-emerald-300'
+                      }`}
+                    >
+                      {dial.label}
+                    </button>
+                  ))}
+                  <div className="flex items-center gap-1.5 ml-auto">
+                    <span className="text-[11px] text-slate-500 font-semibold">Custom Code:</span>
+                    <input
+                      type="text"
+                      value={brief.phoneCountryCode || ''}
+                      disabled={isFieldExcluded('phoneCountryCode')}
+                      onChange={(e) => handleInputChange('phoneCountryCode', e.target.value)}
+                      placeholder="+..."
+                      className="w-20 px-2 py-1 rounded-lg border border-slate-300 text-xs font-mono text-slate-900 bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -785,14 +972,21 @@ Date: ${new Date().toLocaleDateString()}`);
                     </label>
                     {renderFieldControls('phone', brief.phone, () => handleClearField('phone'))}
                   </div>
-                  <input
-                    type="tel"
-                    value={brief.phone}
-                    disabled={isFieldExcluded('phone')}
-                    onChange={(e) => handleInputChange('phone', e.target.value)}
-                    placeholder="e.g. 0810 123 4567"
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-mono text-slate-900 bg-white"
-                  />
+                  <div className="flex items-center gap-1.5">
+                    {brief.phoneCountryCode && !isFieldExcluded('phoneCountryCode') && (
+                      <span className="px-2.5 py-2 rounded-xl bg-slate-100 border border-slate-300 text-xs font-mono font-bold text-slate-700 shrink-0">
+                        {brief.phoneCountryCode}
+                      </span>
+                    )}
+                    <input
+                      type="tel"
+                      value={brief.phone}
+                      disabled={isFieldExcluded('phone')}
+                      onChange={(e) => handleInputChange('phone', e.target.value)}
+                      placeholder="e.g. 0810 123 4567"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-mono text-slate-900 bg-white"
+                    />
+                  </div>
                 </div>
 
                 {/* WhatsApp */}
@@ -805,14 +999,21 @@ Date: ${new Date().toLocaleDateString()}`);
                     </label>
                     {renderFieldControls('whatsapp', brief.whatsapp, () => handleClearField('whatsapp'))}
                   </div>
-                  <input
-                    type="tel"
-                    value={brief.whatsapp}
-                    disabled={isFieldExcluded('whatsapp')}
-                    onChange={(e) => handleInputChange('whatsapp', e.target.value)}
-                    placeholder="e.g. 0810 123 4567"
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-mono text-slate-900 bg-white"
-                  />
+                  <div className="flex items-center gap-1.5">
+                    {brief.phoneCountryCode && !isFieldExcluded('phoneCountryCode') && (
+                      <span className="px-2.5 py-2 rounded-xl bg-slate-100 border border-slate-300 text-xs font-mono font-bold text-slate-700 shrink-0">
+                        {brief.phoneCountryCode}
+                      </span>
+                    )}
+                    <input
+                      type="tel"
+                      value={brief.whatsapp}
+                      disabled={isFieldExcluded('whatsapp')}
+                      onChange={(e) => handleInputChange('whatsapp', e.target.value)}
+                      placeholder="e.g. 0810 123 4567"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-mono text-slate-900 bg-white"
+                    />
+                  </div>
                 </div>
 
                 {/* Email */}
@@ -955,16 +1156,16 @@ Date: ${new Date().toLocaleDateString()}`);
             <div className="space-y-5 animate-fade-in">
               <div className="border-b border-slate-100 pb-3 flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <h4 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-                    <ImageIcon className="w-4 h-4 text-emerald-600" />
-                    <span>Pictures, Images, Logo & Visual Assets</span>
+                  <h4 className="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
+                    <ImageIcon className="w-5 h-5 text-emerald-600" />
+                    <span>Step 4: Pictures, Images & Brand Logo</span>
                   </h4>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Upload images or paste cloud drive links. You can remove individual images or clear them all.
+                  <p className="text-sm font-semibold text-slate-600 mt-1">
+                    Upload your business photos, products, and logo files.
                   </p>
                 </div>
-                <div className="text-xs font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                  Step 4 of 5
+                <div className="text-xs font-black font-mono text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">
+                  Step 4 of 6
                 </div>
               </div>
 
@@ -1116,25 +1317,25 @@ Date: ${new Date().toLocaleDateString()}`);
             </div>
           )}
 
-          {/* STEP 5: REVIEW, ADD ANY OTHER INFO, REMOVE ANY INFO & SUBMISSION */}
+          {/* STEP 5: OTHER INFORMATION (HOURS, BANK, CAC, BRANCHES, CUSTOM DETAILS) */}
           {activeStep === 5 && (
             <div className="space-y-6 animate-fade-in">
               <div className="border-b border-slate-100 pb-3 flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <h4 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    <span>Review & Finalize: Add Any Other Info or Remove Any Info</span>
+                  <h4 className="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-emerald-600" />
+                    <span>Step 5: Other Information & Custom Details</span>
                   </h4>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Check all information below. You can add extra details or click Remove on any item you don't want sent to Paul.
+                  <p className="text-sm font-semibold text-slate-600 mt-1">
+                    Add any extra details necessary for your website like working hours, bank payment details, branch locations, CAC number, or special instructions.
                   </p>
                 </div>
-                <span className="text-xs font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                  Step 5 of 5
+                <span className="text-xs font-black font-mono text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">
+                  Step 5 of 6
                 </span>
               </div>
 
-              {/* 🌟 SPECIAL FEATURE: ADD ANY OTHER INFO BUILDER */}
+              {/* 🌟 ADD OTHER INFO BUILDER */}
               <div className="bg-gradient-to-br from-emerald-950 via-slate-900 to-slate-950 text-white rounded-3xl p-5 border-2 border-emerald-400/80 shadow-xl space-y-4">
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
                   <div className="flex items-center gap-2">
@@ -1143,7 +1344,7 @@ Date: ${new Date().toLocaleDateString()}`);
                     </span>
                     <div>
                       <h5 className="text-sm font-black text-white">
-                        Add Any Other Info (Custom Details)
+                        Add Other Information
                       </h5>
                       <p className="text-xs text-slate-300">
                         Include opening hours, branch addresses, CAC number, bank payment info, or any custom request.
@@ -1250,7 +1451,7 @@ Date: ${new Date().toLocaleDateString()}`);
                 )}
 
                 {/* List of Added Custom Info Items with Remove Button */}
-                {brief.customInfoItems && brief.customInfoItems.length > 0 && (
+                {brief.customInfoItems && brief.customInfoItems.length > 0 ? (
                   <div className="space-y-2 pt-2">
                     <span className="text-xs font-bold text-emerald-300 block">
                       Custom Info Added ({brief.customInfoItems.length}):
@@ -1282,7 +1483,56 @@ Date: ${new Date().toLocaleDateString()}`);
                       ))}
                     </div>
                   </div>
+                ) : (
+                  <div className="p-4 rounded-2xl bg-slate-900/60 border border-dashed border-slate-700 text-center text-xs text-slate-400">
+                    <span>No extra information added yet. Click "+ Add New Info Field" or select any preset above to add opening hours, bank details, branch offices, or custom notes.</span>
+                  </div>
                 )}
+              </div>
+
+              {/* Extra Instructions or Notes */}
+              <div className="space-y-1.5 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                    Additional Instructions or Specific Notes
+                  </label>
+                  {brief.additionalNotes && (
+                    <button
+                      type="button"
+                      onClick={() => handleClearField('additionalNotes')}
+                      className="text-[11px] text-slate-400 hover:text-red-500 font-semibold"
+                    >
+                      Clear Notes
+                    </button>
+                  )}
+                </div>
+                <textarea
+                  rows={3}
+                  value={brief.additionalNotes}
+                  onChange={(e) => handleInputChange('additionalNotes', e.target.value)}
+                  placeholder="Tell Paul anything else specific about your project, domain preferences, target launch date, or questions..."
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-900 resize-none bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* STEP 6: REVIEW, REMOVE ANY INFO & SUBMIT */}
+          {activeStep === 6 && (
+            <div className="space-y-6 animate-fade-in">
+              <div className="border-b border-slate-100 pb-3 flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <h4 className="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                    <span>Step 6: Review & Send Website Details</span>
+                  </h4>
+                  <p className="text-sm font-semibold text-slate-600 mt-1">
+                    Check your details and submit directly to Paul Web Design via WhatsApp or Email.
+                  </p>
+                </div>
+                <span className="text-xs font-black font-mono text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">
+                  Step 6 of 6
+                </span>
               </div>
 
               {/* 🗑️ REVIEW & REMOVE ANY INFO BOARD */}
@@ -1320,6 +1570,39 @@ Date: ${new Date().toLocaleDateString()}`);
                       </span>
                     </div>
                     {renderFieldControls('brandIndustry', brief.brandIndustry, () => handleClearField('brandIndustry'))}
+                  </div>
+
+                  {/* Market Reach (Local vs Intl) */}
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200">
+                    <div className="truncate pr-2">
+                      <span className="font-bold text-slate-500 text-[10px] block uppercase">Market Audience Reach</span>
+                      <span className={`font-semibold capitalize ${isFieldExcluded('targetMarket') ? 'line-through text-slate-400' : 'text-slate-900'}`}>
+                        {brief.targetMarket === 'international' ? 'International / Global' : brief.targetMarket === 'local' ? 'Local Only' : 'Both Local & Intl'}
+                      </span>
+                    </div>
+                    {renderFieldControls('targetMarket', brief.targetMarket, () => handleClearField('targetMarket'))}
+                  </div>
+
+                  {/* Target Country */}
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200">
+                    <div className="truncate pr-2">
+                      <span className="font-bold text-slate-500 text-[10px] block uppercase">Target Countries</span>
+                      <span className={`font-semibold ${isFieldExcluded('targetCountry') ? 'line-through text-slate-400' : 'text-slate-900'}`}>
+                        {brief.targetCountry || '(None specified)'}
+                      </span>
+                    </div>
+                    {renderFieldControls('targetCountry', brief.targetCountry, () => handleClearField('targetCountry'))}
+                  </div>
+
+                  {/* Currency Preference */}
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200">
+                    <div className="truncate pr-2">
+                      <span className="font-bold text-slate-500 text-[10px] block uppercase">Preferred Currency</span>
+                      <span className={`font-semibold ${isFieldExcluded('currencyPreference') ? 'line-through text-slate-400' : 'text-slate-900'}`}>
+                        {brief.currencyPreference || '(None specified)'}
+                      </span>
+                    </div>
+                    {renderFieldControls('currencyPreference', brief.currencyPreference, () => handleClearField('currencyPreference'))}
                   </div>
 
                   {/* Slogan */}

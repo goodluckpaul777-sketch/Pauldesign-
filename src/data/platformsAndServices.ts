@@ -105,6 +105,22 @@ export const AD_PLATFORMS: AdPlatform[] = [
     ],
     iconName: 'Instagram',
     popularity: 'High'
+  },
+  {
+    id: 'nigerian-commerce-channels',
+    name: 'Nigerian Local Products Ad Format (Clothes, Food, Fish, Raw Materials)',
+    category: 'nigerian-commerce',
+    description: 'Specialized ad formats tailored for Nigerian vendors selling clothes, party food, smoked catfish, packaged plantain chips, and raw agro-commodities.',
+    url: '#nigerian-products-section',
+    bestFor: 'Daily WhatsApp orders, inter-state waybills, and domestic & diaspora retail sales',
+    tips: [
+      'Clothes: Run short video ads showing fabric quality + "Click link to select your UK/NG size and order on WhatsApp"',
+      'Food: Run geo-targeted lunch-hour ads (11 AM - 1:30 PM) showing sizzling jollof/soup bowls with automatic delivery fee calculation',
+      'Smoked Fish: Showcase sand-free, oven-dried golden catfish with vacuum-sealed packaging and inter-state bus park delivery',
+      'Raw Materials & Packaged Foods: Display bulk MOQ specs, NAFDAC certification, and distributor carton pricing'
+    ],
+    iconName: 'ShoppingBag',
+    popularity: 'Very High'
   }
 ];
 
@@ -275,5 +291,32 @@ Let's talk about your business goal!`
 
 Contact: 08106259457 (Call & WhatsApp)
 Clean code, full handover, and guaranteed satisfaction!`
+  },
+  {
+    title: 'Nigerian Local Products Ad Template (Clothes, Food, Fish, Raw Materials)',
+    text: `🇳🇬 ATTENTION NIGERIAN MERCHANTS & BUSINESS OWNERS!
+Are you selling Clothes, Food/Catering, Packaged Snacks, Smoked Catfish, or Local Raw Materials?
+
+Stop answering 100 "How much?" messages manually every day! Let's build you a modern website that:
+✅ Displays all your products with prices in Naira (₦) & Dollars ($)
+✅ Lets customers select sizes, food portions, or fish cartons
+✅ Calculates inter-state delivery & bus-park waybill automatically
+✅ Lets customers checkout directly via WhatsApp or instant Bank Transfer
+
+📞 Call / WhatsApp Paul: 08106259457
+Let's launch your online store this week!`
+  },
+  {
+    title: 'WhatsApp Status Direct Pitch (For Clothes & Food Vendors)',
+    text: `👗🍲 Selling Clothes, Soup Bowls or Packaged Food?
+Your business deserves more than just replying DMs on Instagram!
+
+With your own website:
+1. Customers view your menu / clothing rack anytime
+2. They place orders with 1-click straight to your WhatsApp
+3. You get instant payments with payment receipts
+
+Let me build your official website for you!
+📞 Call / WhatsApp: 08106259457`
   }
 ];

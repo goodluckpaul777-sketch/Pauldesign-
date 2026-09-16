@@ -1,7 +1,7 @@
 export interface AdPlatform {
   id: string;
   name: string;
-  category: 'freelance' | 'social' | 'local' | 'portfolio';
+  category: 'freelance' | 'social' | 'local' | 'nigerian-commerce' | 'portfolio';
   description: string;
   url: string;
   bestFor: string;
@@ -61,6 +61,12 @@ export interface ClientProjectBrief {
   servicesProducts: string;
   targetAudience: string;
   
+  // Target Market & Location (International vs Local)
+  targetMarket?: 'local' | 'international' | 'both';
+  targetCountry?: string;
+  currencyPreference?: string;
+  phoneCountryCode?: string;
+
   // Contact details
   contactPerson: string;
   email: string;

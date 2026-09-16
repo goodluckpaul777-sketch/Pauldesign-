@@ -92,42 +92,28 @@ export const HeroStickerBanner: React.FC<HeroStickerBannerProps> = ({
         </div>
       </div>
 
-      <div className="p-6 sm:p-10 md:p-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div className="p-6 sm:p-10 md:p-14">
+        {/* Top Header & Main Headline with Spacious Typography */}
+        <div className="space-y-6 max-w-5xl">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900 border border-emerald-500/40 text-emerald-400 text-sm font-bold uppercase tracking-wider">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+            <span>Paul Web Design • Available for New Projects</span>
+          </div>
 
-          {/* Left Column: Headline, Contact Card, Quick Actions */}
-          <div className="lg:col-span-7 space-y-6">
-            
-            {/* Brand Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>Paul Web Design • Available for New Projects</span>
-            </div>
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[1.1] tracking-tight">
+            Paul Web Design — <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">Custom Websites, Back-End Setup</span> & Live Launch
+          </h1>
 
-            {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight tracking-tight">
-              Paul Web Design — <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">Custom Websites, Back-End Setup</span> & Live Launch
-            </h1>
+          <p className="text-slate-200 text-lg sm:text-2xl leading-relaxed font-normal">
+            Clean, high-speed website creation tailored for your business by <strong>Paul Web Design</strong>. Complete back-end system setup for your full control & management, custom icons, live hosting, domain setup, and vibrant visual graphics.
+          </p>
+        </div>
 
-            <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
-              Clean website creation tailored for your brand by <strong>Paul Web Design</strong>. Complete back-end system setup for your full control & management, custom icons, live hosting, domain setup, and vibrant visual graphics.
-            </p>
+        {/* Spacious 2-Column Section: Left (Actions & Direct Contact) | Right (Multi-Image Showcase) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start pt-8">
 
-            {/* Feature Capability Highlights (Price-Free) */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-1">
-              <div className="px-3.5 py-2 rounded-xl bg-slate-900 border border-emerald-500/40 text-xs font-bold text-white flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                <span>Front Page & Profile Sites</span>
-              </div>
-              <div className="px-3.5 py-2 rounded-xl bg-slate-900 border border-teal-500/40 text-xs font-bold text-white flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-teal-400" />
-                <span>Full Website + Custom Icons</span>
-              </div>
-              <div className="px-3.5 py-2 rounded-xl bg-slate-900 border border-cyan-500/40 text-xs font-bold text-white flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-cyan-400" />
-                <span>Post Live & Custom Domain</span>
-              </div>
-            </div>
+          {/* Left Column: Intake Spotlight & Direct Contact (lg:col-span-6) */}
+          <div className="lg:col-span-6 space-y-6">
 
             {/* UNMISSABLE SPOTLIGHT CARD: CLIENT INFORMATION INTAKE */}
             <div 
@@ -135,43 +121,19 @@ export const HeroStickerBanner: React.FC<HeroStickerBannerProps> = ({
               onClick={onOpenIntakeModal}
               className="relative bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-400 p-1 rounded-3xl shadow-[0_0_35px_rgba(16,185,129,0.35)] cursor-pointer group transition-all hover:scale-[1.01]"
             >
-              <div className="bg-slate-950 p-5 sm:p-6 rounded-[22px] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-                <div className="space-y-2">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="px-3 py-1 rounded-full bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-md">
-                      <Sparkles className="w-3.5 h-3.5 fill-current" />
-                      VERY OBVIOUS TO SPOT
-                    </span>
-                    <span className="text-xs font-mono text-emerald-400 font-bold">
-                      ⭐ 1-Click Intake Portal
+              <div className="bg-slate-950 p-6 sm:p-7 rounded-[22px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+                <div className="space-y-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="px-3 py-1 rounded-full bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md">
+                      ⭐ 1-Click Project Form
                     </span>
                   </div>
-                  <h3 className="text-lg sm:text-2xl font-black text-white leading-tight">
+                  <h3 className="text-xl sm:text-2xl font-black text-white leading-snug">
                     Give Paul The Information For Your Website
                   </h3>
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    <span className="px-2 py-0.5 rounded-lg bg-slate-900 border border-slate-700 text-emerald-400 font-bold text-xs">
-                      🏢 Company Name
-                    </span>
-                    <span className="px-2 py-0.5 rounded-lg bg-slate-900 border border-slate-700 text-emerald-400 font-bold text-xs">
-                      ✨ Slogan & Motto
-                    </span>
-                    <span className="px-2 py-0.5 rounded-lg bg-slate-900 border border-slate-700 text-emerald-400 font-bold text-xs">
-                      📸 Pictures & Images
-                    </span>
-                    <span className="px-2 py-0.5 rounded-lg bg-slate-900 border border-slate-700 text-emerald-400 font-bold text-xs">
-                      📞 WhatsApp & Contacts
-                    </span>
-                    <span className="px-2 py-0.5 rounded-lg bg-slate-900 border border-slate-700 text-emerald-400 font-bold text-xs">
-                      🌐 Social Media Handles
-                    </span>
-                    <span className="px-2 py-0.5 rounded-lg bg-emerald-950 border border-emerald-500 text-emerald-300 font-black text-xs">
-                      ➕ Add Any Other Info
-                    </span>
-                    <span className="px-2 py-0.5 rounded-lg bg-red-950 border border-red-500 text-red-300 font-black text-xs">
-                      ✕ Remove Any Info
-                    </span>
-                  </div>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    Submit your company name, slogan, products, pictures, phone number, and social handles to start building immediately.
+                  </p>
                 </div>
 
                 <button
@@ -180,247 +142,177 @@ export const HeroStickerBanner: React.FC<HeroStickerBannerProps> = ({
                     e.stopPropagation();
                     onOpenIntakeModal();
                   }}
-                  className="w-full lg:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-400 hover:from-emerald-300 hover:to-teal-200 text-slate-950 font-black text-sm flex items-center justify-center gap-2 shadow-xl shrink-0 group-hover:scale-105 transition-all ring-2 ring-white/90 cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-400 hover:from-emerald-300 hover:to-teal-200 text-slate-950 font-black text-base flex items-center justify-center gap-2 shadow-xl shrink-0 group-hover:scale-105 transition-all ring-2 ring-white/90 cursor-pointer"
                 >
                   <ClipboardEdit className="w-5 h-5 stroke-[2.8]" />
-                  <div className="text-left">
-                    <span className="block text-[9px] uppercase font-mono tracking-wider text-slate-900 leading-none">
-                      Add / Remove Details
-                    </span>
-                    <span>CLICK HERE TO SUBMIT INFO</span>
-                  </div>
-                  <ArrowRight className="w-4 h-4 stroke-[2.8]" />
+                  <span>SUBMIT INFO NOW</span>
+                  <ArrowRight className="w-5 h-5 stroke-[2.8]" />
                 </button>
               </div>
             </div>
 
-            {/* Prominent Direct Contact Information with Phone and Email */}
-            <motion.div 
-              whileHover={{ scale: 1.01 }}
-              className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-900/90 to-emerald-950/40 border-2 border-emerald-500/50 shadow-xl shadow-emerald-950/30 relative overflow-hidden space-y-4"
-            >
-              <div className="absolute top-0 right-0 px-3 py-1 bg-emerald-500 text-slate-950 text-[10px] font-bold uppercase rounded-bl-lg tracking-wider">
-                Direct Inquiries
-              </div>
-              
-              <div className="text-xs text-slate-400 uppercase font-semibold tracking-wider flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-emerald-400" /> Contact Paul Directly:
+            {/* Prominent Direct Contact Card */}
+            <div className="p-6 sm:p-7 rounded-3xl bg-slate-900 border-2 border-emerald-500/50 shadow-xl space-y-5">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div className="text-sm text-emerald-400 uppercase font-black tracking-wider flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-emerald-400" />
+                  <span>Direct Contact Line</span>
+                </div>
+                <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
+                  Ready to Chat
+                </span>
               </div>
 
-              {/* Phone Row */}
-              <div className="flex flex-wrap items-center justify-between gap-3 pt-1 border-b border-slate-800/80 pb-3">
-                <div className="space-y-0.5">
-                  <span className="text-[11px] text-slate-400 block font-mono">Phone / WhatsApp Line</span>
-                  <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-400 tracking-wider">
+              {/* Phone Row with Large Font */}
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <span className="text-xs text-slate-400 block font-mono">Call or WhatsApp Paul</span>
+                  <a 
+                    href={`tel:${phoneNumber}`} 
+                    className="text-3xl sm:text-4xl font-black font-mono text-emerald-400 tracking-wider hover:underline block"
+                  >
                     {formattedPhone}
-                  </div>
+                  </a>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <a
                     href={`tel:${phoneNumber}`}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-all shadow-md active:scale-95"
+                    className="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm transition-all shadow-md active:scale-95 flex items-center gap-2"
                   >
-                    <Phone className="w-3.5 h-3.5" />
-                    Call
+                    <Phone className="w-4 h-4" />
+                    <span>Call Now</span>
                   </a>
                   <a
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-bold text-xs transition-all active:scale-95"
+                    className="px-5 py-3 rounded-xl bg-emerald-600/30 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/50 font-black text-sm transition-all active:scale-95 flex items-center gap-2"
                   >
-                    <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
-                    WhatsApp
+                    <MessageSquare className="w-4 h-4 text-emerald-400" />
+                    <span>WhatsApp</span>
                   </a>
                   <button
                     onClick={handleCopyPhone}
                     title="Copy Phone Number"
-                    className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-all active:scale-95"
+                    className="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all cursor-pointer"
                   >
-                    {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    {copiedPhone ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                   </button>
                 </div>
               </div>
 
               {/* Email Row */}
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="space-y-0.5">
-                  <span className="text-[11px] text-slate-400 block font-mono">Email Address</span>
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800/80">
+                <div>
+                  <span className="text-xs text-slate-400 block font-mono">Email Address</span>
                   <a 
                     href={`mailto:${emailAddress}`}
-                    className="text-base sm:text-lg font-bold font-mono text-cyan-300 hover:text-cyan-200 hover:underline flex items-center gap-1.5"
+                    className="text-base sm:text-lg font-bold font-mono text-cyan-300 hover:text-cyan-200 hover:underline flex items-center gap-2"
                   >
                     <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
                     <span>{emailAddress}</span>
                   </a>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <a
-                    href={`mailto:${emailAddress}?subject=Website%20Design%20Inquiry%20-%20Paul%20Web%20Design`}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 font-bold text-xs transition-all active:scale-95"
-                  >
-                    <Mail className="w-3.5 h-3.5" />
-                    Send Email
-                  </a>
-                  <button
-                    onClick={handleCopyEmail}
-                    title="Copy Email Address"
-                    className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-all active:scale-95"
-                  >
-                    {copiedEmail ? <Check className="w-3.5 h-3.5 text-cyan-400" /> : <Copy className="w-3.5 h-3.5" />}
-                  </button>
-                </div>
+                <button
+                  onClick={handleCopyEmail}
+                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono transition-all cursor-pointer flex items-center gap-1.5"
+                >
+                  {copiedEmail ? <Check className="w-3.5 h-3.5 text-cyan-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedEmail ? 'Email Copied!' : 'Copy Email'}</span>
+                </button>
               </div>
-              
-              {(copiedPhone || copiedEmail) && (
-                <div className="text-xs text-emerald-400 pt-1 font-medium flex items-center gap-1.5 animate-fade-in">
-                  <Check className="w-3.5 h-3.5" /> 
-                  <span>{copiedPhone ? 'Phone number (08106259457) copied!' : 'Email address (goodluckpaul777@gmail.com) copied!'}</span>
+
+              {copiedPhone && (
+                <div className="text-sm text-emerald-400 font-semibold flex items-center gap-2 animate-fade-in">
+                  <Check className="w-4 h-4" /> 
+                  <span>Phone number (08106259457) copied to clipboard!</span>
                 </div>
               )}
-            </motion.div>
-
-            {/* Key Bullet Features */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
-              <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2.5">
-                <Zap className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="text-xs font-semibold text-slate-200">Back-End Setup</span>
-              </div>
-              <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2.5">
-                <Globe className="w-4 h-4 text-teal-400 shrink-0" />
-                <span className="text-xs font-semibold text-slate-200">100% Mobile Ready</span>
-              </div>
-              <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2.5">
-                <ShieldCheck className="w-4 h-4 text-indigo-400 shrink-0" />
-                <span className="text-xs font-semibold text-slate-200">High Performance</span>
-              </div>
-              <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2.5">
-                <Award className="w-4 h-4 text-amber-400 shrink-0" />
-                <span className="text-xs font-semibold text-slate-200">Full Handover</span>
-              </div>
-            </div>
-
-            {/* Nav Quick Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <button
-                id="hero-give-info-button"
-                onClick={onOpenIntakeModal}
-                className="px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-300 text-slate-950 font-black text-sm transition-all shadow-lg shadow-emerald-500/25 flex items-center gap-2 group active:scale-95 border border-emerald-300 ring-2 ring-emerald-400/40"
-              >
-                <ClipboardEdit className="w-4 h-4 stroke-[2.5]" />
-                <span>Give Me Your Info (Project Form)</span>
-              </button>
-
-              <button
-                onClick={onNavigateToFeatures}
-                className="px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm transition-all border border-slate-700 flex items-center gap-2 group active:scale-95"
-              >
-                <Sparkles className="w-4 h-4 text-emerald-400" />
-                <span>Explore Visual Showcase</span>
-              </button>
-
-              <button
-                onClick={onNavigateToPlatforms}
-                className="px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium text-sm transition-all flex items-center gap-2"
-              >
-                <span>Where To Advertise</span>
-                <ArrowRight className="w-4 h-4 text-indigo-400 group-hover:translate-x-1 transition-transform" />
-              </button>
             </div>
 
           </div>
 
-          {/* Right Column: Lively Interactive Image Showcase with Thumbnail Switcher */}
-          <div className="lg:col-span-5 relative flex flex-col items-center">
+          {/* Right Column: Multi-Image Showcase Display (lg:col-span-6) */}
+          <div className="lg:col-span-6 space-y-4">
             
-            {/* Outer Decorative Card Frame */}
-            <div className="relative w-full max-w-sm sm:max-w-md space-y-3">
-              
-              {/* Sticker Tag Floating Badge */}
-              <div className="absolute -top-4 -left-4 z-20 bg-emerald-500 text-slate-950 px-4 py-2 rounded-2xl font-black text-xs shadow-lg uppercase tracking-wider transform -rotate-6 border-2 border-slate-950 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" /> Paul Web Design
+            {/* Main Featured Active Image */}
+            <div className="relative overflow-hidden rounded-3xl border-2 border-slate-800 bg-slate-900 shadow-2xl group">
+              <img
+                src={currentImage.path}
+                alt={currentImage.title}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  if (e.currentTarget.src !== currentImage.fallback) {
+                    e.currentTarget.src = currentImage.fallback;
+                  }
+                }}
+                className="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-102 transition-transform duration-300"
+              />
+
+              {/* Floating Badge */}
+              <div className="absolute top-4 left-4 bg-emerald-500 text-slate-950 px-3.5 py-1.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-lg flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>{currentImage.badge}</span>
               </div>
 
-              {/* Contact Pill floating on image */}
-              <div className="absolute -bottom-2 -right-2 z-20 bg-slate-900/95 text-white px-3.5 py-2 rounded-2xl font-mono text-xs shadow-2xl border border-emerald-500/40 flex items-center gap-2 backdrop-blur-md">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-                <span className="text-emerald-400 font-bold">0810 625 9457</span>
-              </div>
-
-              {/* Main Active Image Display */}
-              <div className="overflow-hidden rounded-3xl border-4 border-slate-800 bg-slate-900 shadow-2xl relative group">
-                <img
-                  src={currentImage.path}
-                  alt={currentImage.title}
-                  referrerPolicy="no-referrer"
-                  onError={(e) => {
-                    if (e.currentTarget.src !== currentImage.fallback) {
-                      e.currentTarget.src = currentImage.fallback;
-                    }
-                  }}
-                  className="w-full h-auto object-cover aspect-[4/3] sm:aspect-[3/4] group-hover:scale-105 transition-transform duration-500"
-                />
-                
-                {/* Category Pill on top right of image */}
-                <div className="absolute top-3 right-3 bg-slate-950/85 backdrop-blur-md text-emerald-400 border border-emerald-500/30 text-[11px] font-bold px-3 py-1 rounded-full shadow-md font-mono">
-                  {currentImage.badge}
+              {/* Caption Overlay */}
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-5">
+                <div className="text-white font-extrabold text-lg sm:text-xl flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <span>{currentImage.title}</span>
                 </div>
-
-                {/* Gradient overlay at bottom of image with details */}
-                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 via-slate-950/75 to-transparent flex items-end p-4">
-                  <div className="space-y-0.5">
-                    <div className="text-white font-bold text-sm flex items-center gap-1.5">
-                      <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                      <span>{currentImage.title}</span>
-                    </div>
-                    <div className="text-emerald-400/90 text-xs font-medium">
-                      {currentImage.subtitle}
-                    </div>
-                    <div className="text-slate-400 text-[11px] font-mono pt-1">
-                      Paul Web Design • 08106259457 • goodluckpaul777@gmail.com
-                    </div>
-                  </div>
+                <div className="text-emerald-300 text-sm font-medium mt-0.5">
+                  {currentImage.subtitle}
                 </div>
               </div>
+            </div>
 
-              {/* Lively Image Gallery Thumbnail Bar */}
-              <div className="p-2 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-center justify-between gap-2">
-                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider pl-1 hidden sm:inline">
-                  Gallery:
-                </span>
-                <div className="flex items-center gap-2 w-full sm:w-auto justify-around">
-                  {GALLERY_IMAGES.map((img, idx) => {
-                    const isActive = activeImageIdx === idx;
-                    return (
-                      <button
-                        key={img.id}
-                        onClick={() => setActiveImageIdx(idx)}
-                        className={`relative rounded-xl overflow-hidden border-2 transition-all group ${
-                          isActive
-                            ? 'border-emerald-400 ring-2 ring-emerald-500/40 scale-105 shadow-md shadow-emerald-500/20'
-                            : 'border-slate-700 opacity-60 hover:opacity-100 hover:border-slate-500'
-                        }`}
-                        title={img.title}
-                      >
-                        <img
-                          src={img.path}
-                          alt={img.title}
-                          referrerPolicy="no-referrer"
-                          onError={(e) => {
-                            if (e.currentTarget.src !== img.fallback) {
-                              e.currentTarget.src = img.fallback;
-                            }
-                          }}
-                          className="w-12 h-10 object-cover"
-                        />
-                      </button>
-                    );
-                  })}
-                </div>
+            {/* Showcase More Images Grid: 4 Interactive Images Grid */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs font-bold text-slate-300 uppercase tracking-wider px-1">
+                <span>Showcase of System & Studio Images ({GALLERY_IMAGES.length})</span>
+                <span className="text-emerald-400 font-mono">Click to preview</span>
               </div>
 
+              <div className="grid grid-cols-4 gap-3">
+                {GALLERY_IMAGES.map((img, idx) => {
+                  const isActive = activeImageIdx === idx;
+                  return (
+                    <button
+                      key={img.id}
+                      onClick={() => setActiveImageIdx(idx)}
+                      className={`relative rounded-2xl overflow-hidden border-2 transition-all cursor-pointer group aspect-4/3 ${
+                        isActive
+                          ? 'border-emerald-400 ring-2 ring-emerald-500/50 scale-102 shadow-lg shadow-emerald-500/30'
+                          : 'border-slate-800 opacity-70 hover:opacity-100 hover:border-slate-600'
+                      }`}
+                    >
+                      <img
+                        src={img.path}
+                        alt={img.title}
+                        loading="eager"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          if (e.currentTarget.src !== img.fallback) {
+                            e.currentTarget.src = img.fallback;
+                          }
+                        }}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-slate-950/30 group-hover:bg-transparent transition-colors" />
+                      <div className="absolute bottom-1.5 left-1.5 right-1.5 text-[10px] font-bold text-white truncate drop-shadow-md">
+                        {img.badge}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
           </div>
