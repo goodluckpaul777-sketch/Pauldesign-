@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Phone, MessageSquare, Copy, Check, Sparkles, ShieldCheck, Zap, Globe, ArrowRight, Share2, Award, Mail, Laptop, Monitor, Server, Palette, ClipboardEdit, Search } from 'lucide-react';
 import { motion } from 'motion/react';
-import { developerImg, studioImg, devicesImg, backendImg } from '../assets/images';
+import { developerImg, studioImg, devicesImg, backendImg, logoImg } from '../assets/images';
 
 interface HeroStickerBannerProps {
   onNavigateToPlatforms: () => void;
@@ -11,6 +11,14 @@ interface HeroStickerBannerProps {
 }
 
 const GALLERY_IMAGES = [
+  {
+    id: 'logo',
+    title: 'Paul Web Design Official Brand Identity & Logo',
+    subtitle: 'Motto: “Let Google see your product.”',
+    path: logoImg || '/assets/images/logo.png',
+    fallback: '/assets/images/logo.png',
+    badge: 'Official Logo'
+  },
   {
     id: 'developer',
     title: 'Web Developer with Laptop System',
@@ -106,6 +114,16 @@ export const HeroStickerBanner: React.FC<HeroStickerBannerProps> = ({
               <Search className="w-3.5 h-3.5 text-emerald-400" />
               <span className="text-xs uppercase tracking-wider font-bold text-slate-400">Motto:</span>
               <span className="text-sm font-black text-white italic tracking-wide">“Let Google see your product.”</span>
+            </div>
+
+            {/* Official Logo Emblem */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-700/80 shadow-sm">
+              <img 
+                src={logoImg || "/assets/images/logo.png"} 
+                alt="Paul Web Design Official Logo" 
+                className="w-5 h-5 object-contain rounded"
+              />
+              <span className="text-xs font-bold text-slate-200">Official Logo</span>
             </div>
           </div>
 

@@ -7,8 +7,14 @@ import foodImg from './images/nigerian_jollof_food_1789546801249.jpg';
 import packagedFoodImg from './images/packaged_food_snacks_1789546818222.jpg';
 import fishImg from './images/smoked_catfish_fish_1789546829191.jpg';
 import rawMaterialsImg from './images/local_raw_materials_1789546842824.jpg';
+import logoImg from './images/logo.png';
 
 export const APP_IMAGES = {
+  logo: {
+    src: logoImg || '/assets/images/logo.png',
+    fallback: '/assets/images/logo.png',
+    alt: 'Paul Web Design Official Brand Logo'
+  },
   developer: {
     src: developerImg || '/assets/images/developer_holding_system_1785565545926.jpg',
     fallback: '/assets/images/developer_holding_system_1785565545926.jpg',
@@ -65,7 +71,8 @@ export {
   foodImg,
   packagedFoodImg,
   fishImg,
-  rawMaterialsImg
+  rawMaterialsImg,
+  logoImg
 };
 
 export function createSvgFallback(title: string, subtitle?: string): string {

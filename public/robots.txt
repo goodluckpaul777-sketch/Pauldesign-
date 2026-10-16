@@ -1,0 +1,8 @@
+# robots.txt for Paul Web Design
+# Motto: Let Google see your product.
+
+User-agent: *
+Allow: /
+
+# XML Sitemap Location
+Sitemap: https://ais-pre-rx4zxh2mk5javbyp5umqrr-385736428140.europe-west3.run.app/sitemap.xml

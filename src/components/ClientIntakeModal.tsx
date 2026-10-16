@@ -27,6 +27,7 @@ import {
   MapPin
 } from 'lucide-react';
 import { ClientProjectBrief, UploadedImageInfo, CustomInfoItem } from '../types';
+import { logoImg } from '../assets/images';
 
 interface ClientIntakeModalProps {
   isOpen: boolean;
@@ -495,8 +496,12 @@ Date: ${new Date().toLocaleDateString()}`);
         {/* Modal Header */}
         <div className="bg-slate-950 text-white p-5 sm:p-6 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-emerald-500 text-slate-950 flex items-center justify-center font-black shadow-lg shadow-emerald-500/20">
-              <FileText className="w-5 h-5 stroke-[2.5]" />
+            <div className="w-11 h-11 rounded-2xl bg-black border border-slate-800 overflow-hidden shrink-0 flex items-center justify-center p-0.5 shadow-lg shadow-emerald-500/10">
+              <img 
+                src={logoImg || "/assets/images/logo.png"} 
+                alt="Paul Web Design Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">

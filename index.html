@@ -7,9 +7,85 @@
     <meta name="description" content="Paul Web Design — Motto: Let Google see your product. Professional website builder, custom back-end systems, and digital advertising with direct contact 08106259457 and goodluckpaul777@gmail.com." />
     <meta property="og:title" content="Paul Web Design — Motto: Let Google See Your Product" />
     <meta property="og:description" content="Paul Web Design — Motto: Let Google see your product. Professional website builder, custom back-end systems, and digital advertising with direct contact 08106259457 and goodluckpaul777@gmail.com." />
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/images/logo.png" />
+    <meta property="og:image" content="/assets/images/logo.png" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
     <!-- Preload key showcase images for instant loading -->
+    <link rel="preload" as="image" href="/assets/images/logo.png" fetchpriority="high" />
     <link rel="preload" as="image" href="/assets/images/developer_holding_system_1785565545926.jpg" fetchpriority="high" />
     <link rel="preload" as="image" href="/assets/images/nigerian_fashion_store_1789546788889.jpg" fetchpriority="high" />
+    
+    <!-- Schema.org Structured Data: ProfessionalService & SiteNavigationElement -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "name": "Paul Web Design",
+          "logo": "https://ais-pre-rx4zxh2mk5javbyp5umqrr-385736428140.europe-west3.run.app/assets/images/logo.png",
+          "image": "https://ais-pre-rx4zxh2mk5javbyp5umqrr-385736428140.europe-west3.run.app/assets/images/logo.png",
+          "slogan": "Let Google see your product.",
+          "telephone": "+2348106259457",
+          "email": "goodluckpaul777@gmail.com",
+          "description": "Professional website builder and custom back-end systems engineer in Nigeria. Motto: Let Google see your product.",
+          "serviceType": [
+            "Website Design",
+            "Back-End System Development",
+            "E-Commerce Websites",
+            "SEO & Google Search Visibility"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Website Development Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Clothes & Boutique Websites"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Cooked Food & Restaurant Ordering Websites"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Raw Materials Supply Websites"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Packaged Food & Provision Stores"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Edible & Smoked Fish Distribution Websites"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Paul Web Design Site Map",
+          "url": "/#sitemap-section"
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

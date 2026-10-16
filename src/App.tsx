@@ -8,9 +8,11 @@ import { HeroStickerBanner } from './components/HeroStickerBanner';
 import { NigerianCommerceShowcase } from './components/NigerianCommerceShowcase';
 import { FeaturesShowcase } from './components/FeaturesShowcase';
 import { QuotationCalculator } from './components/QuotationCalculator';
+import { SiteMap } from './components/SiteMap';
 import { ClientIntakeModal } from './components/ClientIntakeModal';
 import { FloatingIntakeIcon } from './components/FloatingIntakeIcon';
-import { Phone, MessageSquare, Globe, Sparkles, Menu, X, ShieldCheck, ArrowUpRight, Copy, Check, Mail, ClipboardEdit, ShoppingBag, Search } from 'lucide-react';
+import { logoImg } from './assets/images';
+import { Phone, MessageSquare, Globe, Sparkles, Menu, X, ShieldCheck, ArrowUpRight, Copy, Check, Mail, ClipboardEdit, ShoppingBag, Search, Compass } from 'lucide-react';
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -42,9 +44,13 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           
           {/* Brand Logo & Company Name */}
-          <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="w-10 h-10 rounded-xl bg-slate-950 text-emerald-400 flex items-center justify-center font-black text-lg border border-slate-800 shadow-sm shrink-0">
-              <span className="text-emerald-400 font-black">P</span>
+          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <div className="w-11 h-11 rounded-xl bg-slate-950 border-2 border-slate-800 shadow-md overflow-hidden shrink-0 flex items-center justify-center p-0.5 group-hover:border-emerald-500/80 transition-colors">
+              <img 
+                src={logoImg || "/assets/images/logo.png"} 
+                alt="Paul Web Design Official Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <div className="font-extrabold text-slate-900 text-base leading-tight">
@@ -88,6 +94,13 @@ export default function App() {
               className="hover:text-slate-900 transition-colors"
             >
               Order Scope
+            </button>
+            <button
+              onClick={() => scrollToSection('sitemap-section')}
+              className="hover:text-emerald-700 transition-colors flex items-center gap-1 text-slate-700"
+            >
+              <Compass className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Site Map</span>
             </button>
           </div>
 
@@ -192,6 +205,13 @@ export default function App() {
             >
               Order Scope & Inquiry
             </button>
+            <button
+              onClick={() => scrollToSection('sitemap-section')}
+              className="block w-full text-left py-2 text-sm font-semibold text-slate-700 hover:text-emerald-600 flex items-center gap-2"
+            >
+              <Compass className="w-4 h-4 text-emerald-600" />
+              <span>Site Map & Index Directory</span>
+            </button>
             <div className="pt-2 border-t border-slate-100 space-y-2">
               <div className="flex items-center justify-between text-xs font-mono font-bold text-slate-500">
                 <span>08106259457</span>
@@ -239,6 +259,12 @@ export default function App() {
         {/* 4. Client Price Quotation Calculator */}
         <QuotationCalculator />
 
+        {/* 5. Complete Site Map & Search Index Directory */}
+        <SiteMap
+          onOpenIntakeModal={() => handleOpenIntakeWithIndustry()}
+          onNavigateToSection={(sectionId) => scrollToSection(sectionId)}
+        />
+
       </main>
 
       {/* Floating Particular Icon for Client Information Intake */}
@@ -260,11 +286,18 @@ export default function App() {
       <footer className="bg-slate-950 text-white border-t border-slate-800 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <div className="w-9 h-9 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center font-black text-base">
-                P
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700/80 overflow-hidden shadow-lg p-0.5 shrink-0 flex items-center justify-center">
+                <img 
+                  src={logoImg || "/assets/images/logo.png"} 
+                  alt="Paul Web Design Official Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <span className="text-lg font-bold">Paul Web Design</span>
+              <div>
+                <span className="text-lg font-bold block leading-tight">Paul Web Design</span>
+                <span className="text-[10px] text-emerald-400 font-mono">Official Brand Identity</span>
+              </div>
             </div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-950/90 border border-emerald-500/40 text-emerald-300 text-xs font-bold">
               <Search className="w-3.5 h-3.5 text-emerald-400" />
@@ -290,6 +323,14 @@ export default function App() {
             <a href="mailto:goodluckpaul777@gmail.com" className="hover:text-cyan-400 font-mono">
               ✉️ Email Paul
             </a>
+            <span className="hidden sm:inline text-slate-700">•</span>
+            <button
+              onClick={() => scrollToSection('sitemap-section')}
+              className="hover:text-emerald-400 font-sans font-semibold flex items-center gap-1 cursor-pointer text-emerald-400"
+            >
+              <Compass className="w-3.5 h-3.5" />
+              <span>Site Map</span>
+            </button>
           </div>
 
           <div className="text-left md:text-right space-y-1">
@@ -298,6 +339,15 @@ export default function App() {
             </div>
             <div className="text-[11px] text-emerald-400 font-mono">
               Mobile Responsive • Back-End System • Full Handover
+            </div>
+            <div className="pt-1 flex md:justify-end gap-3 text-[11px] text-slate-500">
+              <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+                sitemap.xml
+              </a>
+              <span>•</span>
+              <a href="/robots.txt" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+                robots.txt
+              </a>
             </div>
           </div>
         </div>
