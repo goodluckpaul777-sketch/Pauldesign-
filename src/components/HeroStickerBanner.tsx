@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, MessageSquare, Copy, Check, Sparkles, ShieldCheck, Zap, Globe, ArrowRight, Share2, Award, Mail, Laptop, Monitor, Server, Palette, ClipboardEdit } from 'lucide-react';
+import { Phone, MessageSquare, Copy, Check, Sparkles, ShieldCheck, Zap, Globe, ArrowRight, Share2, Award, Mail, Laptop, Monitor, Server, Palette, ClipboardEdit, Search } from 'lucide-react';
 import { motion } from 'motion/react';
 import { developerImg, studioImg, devicesImg, backendImg } from '../assets/images';
 
@@ -84,7 +84,7 @@ export const HeroStickerBanner: React.FC<HeroStickerBannerProps> = ({
       <div className="bg-gradient-to-r from-emerald-500 via-teal-500 to-indigo-600 px-6 py-2.5 flex items-center justify-between text-xs sm:text-sm font-semibold tracking-wide text-slate-950">
         <div className="flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-slate-950 animate-pulse" />
-          <span>PAUL WEB DESIGN • OFFICIAL ADVERT & SHOWCASE STUDIO</span>
+          <span>PAUL WEB DESIGN • MOTTO: “LET GOOGLE SEE YOUR PRODUCT”</span>
         </div>
         <div className="hidden sm:flex items-center gap-4 text-slate-950 font-mono text-xs">
           <span>📞 0810 625 9457</span>
@@ -95,9 +95,18 @@ export const HeroStickerBanner: React.FC<HeroStickerBannerProps> = ({
       <div className="p-6 sm:p-10 md:p-14">
         {/* Top Header & Main Headline with Spacious Typography */}
         <div className="space-y-6 max-w-5xl">
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900 border border-emerald-500/40 text-emerald-400 text-sm font-bold uppercase tracking-wider">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-            <span>Paul Web Design • Available for New Projects</span>
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900 border border-emerald-500/40 text-emerald-400 text-sm font-bold uppercase tracking-wider">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+              <span>Paul Web Design • Available for New Projects</span>
+            </div>
+
+            {/* Official Motto Pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/90 border border-emerald-400/60 text-emerald-300 shadow-sm">
+              <Search className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-xs uppercase tracking-wider font-bold text-slate-400">Motto:</span>
+              <span className="text-sm font-black text-white italic tracking-wide">“Let Google see your product.”</span>
+            </div>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[1.1] tracking-tight">
@@ -105,7 +114,7 @@ export const HeroStickerBanner: React.FC<HeroStickerBannerProps> = ({
           </h1>
 
           <p className="text-slate-200 text-lg sm:text-2xl leading-relaxed font-normal">
-            Clean, high-speed website creation tailored for your business by <strong>Paul Web Design</strong>. Complete back-end system setup for your full control & management, custom icons, live hosting, domain setup, and vibrant visual graphics.
+            Clean, high-speed website creation tailored for your business by <strong>Paul Web Design</strong>. Complete back-end system setup for your full control & management, custom icons, live hosting, domain setup, and vibrant visual graphics — built to fulfill our motto: <strong className="text-emerald-300">“Let Google see your product.”</strong>
           </p>
         </div>
 
@@ -203,25 +212,24 @@ export const HeroStickerBanner: React.FC<HeroStickerBannerProps> = ({
               </div>
 
               {/* Email Row */}
-              <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800/80">
-                <div>
-                  <span className="text-xs text-slate-400 block font-mono">Email Address</span>
-                  <a 
-                    href={`mailto:${emailAddress}`}
-                    className="text-base sm:text-lg font-bold font-mono text-cyan-300 hover:text-cyan-200 hover:underline flex items-center gap-2"
+              <div className="pt-3 border-t border-slate-800/80 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Direct Email</span>
+                  <button
+                    onClick={handleCopyEmail}
+                    className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 border border-slate-700"
                   >
-                    <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
-                    <span>{emailAddress}</span>
-                  </a>
+                    {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
+                    <span>{copiedEmail ? 'Copied!' : 'Copy Email'}</span>
+                  </button>
                 </div>
-
-                <button
-                  onClick={handleCopyEmail}
-                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono transition-all cursor-pointer flex items-center gap-1.5"
+                <a 
+                  href={`mailto:${emailAddress}`}
+                  className="text-lg sm:text-xl font-black font-sans text-emerald-300 hover:text-emerald-200 hover:underline flex items-center gap-2.5 break-all sm:break-normal"
                 >
-                  {copiedEmail ? <Check className="w-3.5 h-3.5 text-cyan-400" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copiedEmail ? 'Email Copied!' : 'Copy Email'}</span>
-                </button>
+                  <Mail className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <span>{emailAddress}</span>
+                </a>
               </div>
 
               {copiedPhone && (
@@ -230,6 +238,24 @@ export const HeroStickerBanner: React.FC<HeroStickerBannerProps> = ({
                   <span>Phone number (08106259457) copied to clipboard!</span>
                 </div>
               )}
+            </div>
+
+            {/* Official Motto Banner Card */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/70 via-slate-900 to-teal-950/70 border border-emerald-500/40 flex items-center gap-4 shadow-lg">
+              <div className="w-11 h-11 rounded-2xl bg-emerald-500 text-slate-950 flex items-center justify-center shrink-0 shadow-md">
+                <Search className="w-5 h-5 stroke-[2.5]" />
+              </div>
+              <div className="space-y-0.5">
+                <div className="text-[11px] font-black uppercase tracking-widest text-emerald-400">
+                  Paul Web Design Official Motto
+                </div>
+                <div className="text-base sm:text-lg font-black text-white italic tracking-wide">
+                  “Let Google see your product.”
+                </div>
+                <div className="text-xs text-slate-300 leading-snug">
+                  Engineered with fast mobile indexing and Google Search structure so customers find you on Google immediately.
+                </div>
+              </div>
             </div>
 
           </div>
@@ -247,8 +273,9 @@ export const HeroStickerBanner: React.FC<HeroStickerBannerProps> = ({
                 fetchPriority="high"
                 referrerPolicy="no-referrer"
                 onError={(e) => {
-                  if (e.currentTarget.src !== currentImage.fallback) {
-                    e.currentTarget.src = currentImage.fallback;
+                  const target = e.currentTarget;
+                  if (target.src !== currentImage.fallback) {
+                    target.src = currentImage.fallback;
                   }
                 }}
                 className="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-102 transition-transform duration-300"

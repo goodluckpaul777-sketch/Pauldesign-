@@ -11,15 +11,12 @@ import {
   CheckCircle2, 
   MessageSquare, 
   Megaphone, 
-  Truck, 
-  ShieldCheck, 
-  Zap, 
   Phone,
   Eye,
-  Layers,
   Flame,
   BadgeCheck,
-  TrendingUp
+  TrendingUp,
+  Search
 } from 'lucide-react';
 import { APP_IMAGES } from '../assets/images';
 
@@ -210,54 +207,20 @@ export const NigerianCommerceShowcase: React.FC<NigerianCommerceShowcaseProps> =
         <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        {/* Floating Moving Stickers Banner */}
-        <div className="flex flex-wrap items-center gap-2 mb-6">
-          
-          <motion.div 
-            animate={{ y: [0, -5, 0] }}
-            transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-black uppercase tracking-wider shadow-sm"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-            <span>🇳🇬 Built for Nigerian Commerce & Exporters</span>
-          </motion.div>
 
-          <motion.div 
-            animate={{ y: [0, 4, 0] }}
-            transition={{ repeat: Infinity, duration: 3.6, ease: 'easeInOut', delay: 0.4 }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 text-xs font-bold"
-          >
-            <Truck className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Lagos • Abuja • Nationwide Delivery</span>
-          </motion.div>
-
-          <motion.div 
-            animate={{ y: [0, -4, 0] }}
-            transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut', delay: 0.8 }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-bold"
-          >
-            <Zap className="w-3.5 h-3.5 text-amber-400" />
-            <span>Fast 1-Click WhatsApp Ordering</span>
-          </motion.div>
-
-          <motion.div 
-            animate={{ y: [0, 5, 0] }}
-            transition={{ repeat: Infinity, duration: 4.2, ease: 'easeInOut', delay: 1.2 }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/15 border border-pink-400/30 text-pink-300 text-xs font-bold hidden sm:inline-flex"
-          >
-            <ShieldCheck className="w-3.5 h-3.5 text-pink-400" />
-            <span>Paystack & Bank Transfer Verified</span>
-          </motion.div>
-
-        </div>
 
         {/* Section Heading & Context */}
         <div className="max-w-3xl space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold uppercase tracking-wider">
+            <Search className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Motto: Let Google see your product</span>
+          </div>
+
           <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
             The Kinds of Websites I Build for <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300">Nigerian Businesses</span>
           </h2>
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-            Nigerian customers frequently need websites for <strong>Clothes & Fashion</strong>, <strong>Food & Catering</strong>, <strong>Local Raw Materials</strong>, <strong>Packaged Foods</strong>, and <strong>Local Edible Fishes</strong>. Here is how I build them with stunning photography, fast mobile speed, inter-state waybill calculation, and ready-to-run advertising formats.
+            Nigerian customers frequently need websites for <strong>Clothes & Fashion</strong>, <strong>Food & Catering</strong>, <strong>Local Raw Materials</strong>, <strong>Packaged Foods</strong>, and <strong>Local Edible Fishes</strong>. True to our motto — <span className="text-emerald-300 font-bold">“Let Google see your product”</span> — every site is built with optimized Google SEO indexing, high-speed mobile loading, inter-state waybill calculation, and ready-to-run advertising formats so buyers discover you on Google immediately.
           </p>
         </div>
 

@@ -67,3 +67,38 @@ export {
   fishImg,
   rawMaterialsImg
 };
+
+export function createSvgFallback(title: string, subtitle?: string): string {
+  const safeTitle = title.replace(/[<>&"]/g, '');
+  const safeSubtitle = (subtitle || 'Paul Web Design • 08106259457').replace(/[<>&"]/g, '');
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+    <defs>
+      <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#090d16"/>
+        <stop offset="50%" stop-color="#064e3b"/>
+        <stop offset="100%" stop-color="#022c22"/>
+      </linearGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#bg)"/>
+    <circle cx="400" cy="240" r="56" fill="#10b981" opacity="0.2"/>
+    <path d="M380 240l16 16 32-32" stroke="#34d399" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="400" y="350" fill="#f8fafc" font-size="26" font-family="system-ui, -apple-system, sans-serif" font-weight="900" text-anchor="middle">${safeTitle}</text>
+    <text x="400" y="390" fill="#6ee7b7" font-size="16" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">${safeSubtitle}</text>
+  </svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+export function handleImageFallback(
+  imgElement: HTMLImageElement,
+  publicFallbackUrl?: string,
+  title?: string
+) {
+  const stage = parseInt(imgElement.dataset.fallbackStage || '0', 10);
+  if (stage === 0 && publicFallbackUrl && !imgElement.src.endsWith(publicFallbackUrl)) {
+    imgElement.dataset.fallbackStage = '1';
+    imgElement.src = publicFallbackUrl;
+  } else if (stage < 2) {
+    imgElement.dataset.fallbackStage = '2';
+    imgElement.src = createSvgFallback(title || 'Paul Web Design');
+  }
+}

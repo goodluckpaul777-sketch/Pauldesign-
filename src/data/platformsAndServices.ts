@@ -161,6 +161,13 @@ export const SERVICE_FEATURES: ServiceFeature[] = [
     badge: 'Ongoing Support'
   },
   {
+    id: 'google-visibility',
+    title: 'Google Search Visibility & SEO Setup',
+    description: 'Fulfilling our core motto — “Let Google see your product.” We engineer schema markup, mobile speed optimization, and Google Search indexing so customers searching online find your shop immediately.',
+    icon: 'Search',
+    badge: 'Our Motto'
+  },
+  {
     id: 'whatsapp-direct',
     title: 'WhatsApp & Direct Phone Contact Button',
     description: 'Direct call and WhatsApp button connected to your phone number so clients reach you with one tap.',

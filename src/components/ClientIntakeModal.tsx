@@ -75,7 +75,7 @@ const SAMPLE_DEMO_DATA: ClientProjectBrief = {
   companyName: 'Apex Prime Logistics & Retail',
   brandIndustry: 'E-Commerce, Freight & Express Delivery',
   slogan: 'Delivering Excellence at the Speed of Trust',
-  motto: 'Integrity, Reliability, Speed',
+  motto: 'Let Google see your product.',
   targetMarket: 'both',
   targetCountry: 'Nigeria & Worldwide (UK, US, Canada, EU)',
   currencyPreference: 'NGN (₦) & USD ($)',
@@ -797,7 +797,7 @@ Date: ${new Date().toLocaleDateString()}`);
                     value={brief.motto}
                     disabled={isFieldExcluded('motto')}
                     onChange={(e) => handleInputChange('motto', e.target.value)}
-                    placeholder="e.g. Quality, Integrity, Reliability"
+                    placeholder='e.g. "Let Google see your product" or "Quality, Integrity, Reliability"'
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm text-slate-900 bg-white"
                   />
                 </div>
@@ -806,7 +806,7 @@ Date: ${new Date().toLocaleDateString()}`);
               <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-4 text-xs text-emerald-900 flex items-start gap-3">
                 <Info className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <p>
-                  <strong>Tip from Paul:</strong> Don't have a slogan or motto? Simply click <em>"Remove Field"</em> on either item and Paul will generate clean branding concepts for you.
+                  <strong>Tip from Paul:</strong> Need inspiration? Our official motto is <em>“Let Google see your product.”</em> Don't have a slogan or motto yet? Simply click <em>"Remove Field"</em> and Paul will generate clean, memorable branding concepts tailored to your business.
                 </p>
               </div>
             </div>

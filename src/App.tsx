@@ -6,13 +6,11 @@
 import React, { useState } from 'react';
 import { HeroStickerBanner } from './components/HeroStickerBanner';
 import { NigerianCommerceShowcase } from './components/NigerianCommerceShowcase';
-import { AdPlatformsGuide } from './components/AdPlatformsGuide';
 import { FeaturesShowcase } from './components/FeaturesShowcase';
 import { QuotationCalculator } from './components/QuotationCalculator';
-import { ProjectIntakeSection } from './components/ProjectIntakeSection';
 import { ClientIntakeModal } from './components/ClientIntakeModal';
 import { FloatingIntakeIcon } from './components/FloatingIntakeIcon';
-import { Phone, MessageSquare, Globe, Sparkles, Menu, X, ShieldCheck, ArrowUpRight, Copy, Check, Mail, ClipboardEdit, ShoppingBag } from 'lucide-react';
+import { Phone, MessageSquare, Globe, Sparkles, Menu, X, ShieldCheck, ArrowUpRight, Copy, Check, Mail, ClipboardEdit, ShoppingBag, Search } from 'lucide-react';
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -45,17 +43,20 @@ export default function App() {
           
           {/* Brand Logo & Company Name */}
           <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="w-10 h-10 rounded-xl bg-slate-950 text-emerald-400 flex items-center justify-center font-black text-lg border border-slate-800 shadow-sm">
+            <div className="w-10 h-10 rounded-xl bg-slate-950 text-emerald-400 flex items-center justify-center font-black text-lg border border-slate-800 shadow-sm shrink-0">
               <span className="text-emerald-400 font-black">P</span>
             </div>
             <div>
               <div className="font-extrabold text-slate-900 text-base leading-tight">
                 Paul <span className="text-emerald-600">Web Design</span>
               </div>
-              <div className="text-[10px] text-slate-500 font-mono flex items-center gap-1.5">
-                <span>08106259457</span>
-                <span>•</span>
-                <span className="hidden sm:inline">goodluckpaul777@gmail.com</span>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-[10px] text-slate-500 font-mono">08106259457</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100/90 px-1.5 py-0.5 rounded border border-emerald-300 inline-flex items-center gap-1">
+                  <Search className="w-2.5 h-2.5 text-emerald-700" />
+                  <span>Motto: Let Google see your product.</span>
+                </span>
               </div>
             </div>
           </div>
@@ -70,20 +71,14 @@ export default function App() {
               <span>Nigerian Products & Websites</span>
             </button>
             <button
-              onClick={() => scrollToSection('platforms-section')}
-              className="hover:text-slate-900 transition-colors"
-            >
-              Where To Advertise
-            </button>
-            <button
               onClick={() => scrollToSection('features-section')}
               className="hover:text-slate-900 transition-colors"
             >
               Visual Showcase
             </button>
             <button
-              onClick={() => scrollToSection('intake-section')}
-              className="text-emerald-700 font-bold hover:text-emerald-800 transition-colors flex items-center gap-1"
+              onClick={() => handleOpenIntakeWithIndustry()}
+              className="text-emerald-700 font-bold hover:text-emerald-800 transition-colors flex items-center gap-1 cursor-pointer"
             >
               <ClipboardEdit className="w-3.5 h-3.5" />
               <span>Submit Business Info</span>
@@ -150,6 +145,12 @@ export default function App() {
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-3 animate-fade-in">
+            {/* Brand Motto Callout */}
+            <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-bold flex items-center gap-2">
+              <Search className="w-4 h-4 text-emerald-700 shrink-0" />
+              <span>Motto: Let Google see your product.</span>
+            </div>
+
             <button
               id="mobile-give-info-button"
               onClick={() => {
@@ -170,22 +171,20 @@ export default function App() {
               <span>Nigerian Products & Websites</span>
             </button>
             <button
-              onClick={() => scrollToSection('platforms-section')}
-              className="block w-full text-left py-2 text-sm font-semibold text-slate-700 hover:text-emerald-600"
-            >
-              Where To Advertise
-            </button>
-            <button
               onClick={() => scrollToSection('features-section')}
               className="block w-full text-left py-2 text-sm font-semibold text-slate-700 hover:text-emerald-600"
             >
               Visual Showcase & Features
             </button>
             <button
-              onClick={() => scrollToSection('intake-section')}
-              className="block w-full text-left py-2 text-sm font-semibold text-slate-700 hover:text-emerald-600"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                handleOpenIntakeWithIndustry();
+              }}
+              className="block w-full text-left py-2 text-sm font-semibold text-slate-700 hover:text-emerald-600 flex items-center gap-2"
             >
-              Information Submission Section
+              <ClipboardEdit className="w-4 h-4 text-emerald-600" />
+              <span>Submit Business Info</span>
             </button>
             <button
               onClick={() => scrollToSection('calculator-section')}
@@ -223,7 +222,7 @@ export default function App() {
         
         {/* 1. Front Page Hero Section (Developer with system, live showcase & contact info) */}
         <HeroStickerBanner
-          onNavigateToPlatforms={() => scrollToSection('platforms-section')}
+          onNavigateToPlatforms={() => scrollToSection('nigerian-products-section')}
           onNavigateToFeatures={() => scrollToSection('features-section')}
           onNavigateToCalculator={() => scrollToSection('calculator-section')}
           onOpenIntakeModal={() => handleOpenIntakeWithIndustry()}
@@ -234,16 +233,10 @@ export default function App() {
           onOpenIntakeModal={handleOpenIntakeWithIndustry}
         />
 
-        {/* 3. Directory of Advertising Platforms (Answering user query) */}
-        <AdPlatformsGuide />
-
-        {/* 4. Features & Website Portfolio Showcase */}
+        {/* 3. Features & Website Portfolio Showcase */}
         <FeaturesShowcase />
 
-        {/* 5. Client Information Submission Intake Section */}
-        <ProjectIntakeSection onOpenIntakeModal={() => handleOpenIntakeWithIndustry()} />
-
-        {/* 6. Client Price Quotation Calculator */}
+        {/* 4. Client Price Quotation Calculator */}
         <QuotationCalculator />
 
       </main>
@@ -272,6 +265,10 @@ export default function App() {
                 P
               </div>
               <span className="text-lg font-bold">Paul Web Design</span>
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-950/90 border border-emerald-500/40 text-emerald-300 text-xs font-bold">
+              <Search className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Motto: “Let Google see your product.”</span>
             </div>
             <p className="text-slate-400 text-xs leading-relaxed max-w-sm">
               Official portfolio and advertising showcase for custom website building, back-end system setup, and live domain launches.

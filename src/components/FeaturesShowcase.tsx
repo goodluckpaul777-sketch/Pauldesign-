@@ -43,6 +43,7 @@ export const FeaturesShowcase: React.FC = () => {
       case 'Sparkles': return <Sparkles className="w-6 h-6 text-amber-500" />;
       case 'Wrench': return <Wrench className="w-6 h-6 text-blue-500" />;
       case 'PhoneCall': return <PhoneCall className="w-6 h-6 text-emerald-600" />;
+      case 'Search': return <Search className="w-6 h-6 text-emerald-500" />;
       default: return <ShieldCheck className="w-6 h-6 text-slate-500" />;
     }
   };
